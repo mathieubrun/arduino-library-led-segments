@@ -8,10 +8,12 @@ class LedSegments
 {
     public:
         LedSegments(LedSegment &first, LedSegment &second);
-        int writeValue(int segment, int value);
-        int writeValue(int value);
-        int writeRaw(int segment, byte value);
-        int dot(int segment, bool);
+        void writeValue(int segment, int value);
+        void writeValue(int value);
+        void writeRaw(int segment, byte value);
+        void dot(int segment, bool);
+        void clear();
+        void clear(int segment);
 
     private:
         LedSegment *_first, *_second;

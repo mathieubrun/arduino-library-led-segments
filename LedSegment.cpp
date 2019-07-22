@@ -34,24 +34,24 @@ LedSegment::LedSegment(byte pinA, byte pinB, byte pinC, byte pinD, byte pinE, by
     pinMode(pinDot, OUTPUT);
 }
 
-int LedSegment::writeValue(int value)
+void LedSegment::writeValue(int value)
 {
     if (value < 0 || value > 9)
     {
-        return -1;
+        return;
     }
 
     byte bits = _numbers[value];
 
-    return writeRaw(bits);
+    writeRaw(bits);
 }
 
-int LedSegment::dot(bool state)
+void LedSegment::dot(bool state)
 {
     digitalWrite(_pinDot, state);
 }
 
-int LedSegment::writeRaw(byte bits)
+void LedSegment::writeRaw(byte bits)
 {
     digitalWrite(_pinA, (bits & 0b10000000) >> 7);
     digitalWrite(_pinB, (bits & 0b01000000) >> 6);
@@ -60,6 +60,15 @@ int LedSegment::writeRaw(byte bits)
     digitalWrite(_pinE, (bits & 0b00001000) >> 3);
     digitalWrite(_pinF, (bits & 0b00000100) >> 2);
     digitalWrite(_pinG, (bits & 0b00000010) >> 1);
+}
 
-    return 0;
+void LedSegment::clear()
+{
+    digitalWrite(_pinA, 0);
+    digitalWrite(_pinB, 0);
+    digitalWrite(_pinC, 0);
+    digitalWrite(_pinD, 0);
+    digitalWrite(_pinE, 0);
+    digitalWrite(_pinF, 0);
+    digitalWrite(_pinG, 0);
 }
